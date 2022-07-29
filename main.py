@@ -1,5 +1,6 @@
 """
-number of players fixed to 4
+number of players fixed to got from terminal input
+
 input variables: grid size
 the player who reaches the highest position as per the grid size wins
 program terminates when the player reaches the highest position

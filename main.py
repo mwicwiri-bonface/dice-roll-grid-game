@@ -21,8 +21,7 @@ import random
 
 # global variables
 play_history = []
-players = []
-position_history = []
+current_player_position = []
 grid_size = int(input('enter the grid size: '))
 highest_position = grid_size * grid_size
 number_of_players = int(input('enter the number of players: '))
@@ -49,9 +48,8 @@ def create_players_():
     function to create players
     """
     for player in range(number_of_players):
-        players.append({'position': 0, 'win_status': False})
         play_history.append({'player': player + 1, 'position': [], 'dice_roll': [], 'win_status': False})
-        position_history.append(0)
+        current_player_position.append(0)
 
 
 def play_game():
@@ -62,20 +60,20 @@ def play_game():
         player = None
         for player in range(number_of_players):
             dice_roll = roll_dice_()
-            if play_turn(position_history[player], dice_roll) > highest_position:
-                play_history[player]['position'].append(position_history[player])
+            if play_turn(current_player_position[player], dice_roll) > highest_position:
+                play_history[player]['position'].append(current_player_position[player])
                 play_history[player]['dice_roll'].append(dice_roll)
                 continue
             else:
-                position_history[player] = play_turn(position_history[player], dice_roll)
-                play_history[player]['position'].append(position_history[player])
+                current_player_position[player] = play_turn(current_player_position[player], dice_roll)
+                play_history[player]['position'].append(current_player_position[player])
                 play_history[player]['dice_roll'].append(dice_roll)
-                if position_history[player] == highest_position:
+                if current_player_position[player] == highest_position:
                     play_history[player]['win_status'] = True
                     print(f'player {player + 1} has won the game')
                     break
             player = player
-        if position_history[player] == highest_position:
+        if current_player_position[player] == highest_position:
             break
 
 
@@ -91,4 +89,4 @@ if __name__ == "__main__":
     starting_game()
     # print("players", players)
     print("play history", play_history)
-    print("current position", position_history)
+    print("current position", current_player_position)
